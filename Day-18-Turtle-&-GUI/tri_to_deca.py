@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen
 tim = Turtle()
-
+tim.speed('fast')
 colors = ['red', 'magenta', 'aquamarine', 'purple', 'grey', 'crimson', 'olive', 'orange']
 
 
