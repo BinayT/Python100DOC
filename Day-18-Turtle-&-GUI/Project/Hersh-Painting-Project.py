@@ -1,10 +1,5 @@
-import random
-from colors import colors_list
+from colors import choose_random
 from tim_turtle import tim, screen
-
-
-def choose_random():
-    return random.choice(colors_list)
 
 
 def draw_lines(y_gap, limit=240):
