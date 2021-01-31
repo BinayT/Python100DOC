@@ -26,6 +26,9 @@ winner = None
 while game_running:
     position = 220
     for key in all_turtles:
+        all_turtles[key].pendown()
+        all_turtles[key].pencolor(all_turtles[key].color()[0])
+        all_turtles[key].pensize(3)
         all_turtles[key].forward(random.randint(0, 10))
         if all_turtles[key].pos()[0] >= 220:
             game_running = False
