@@ -12,7 +12,8 @@ class MakeTurtle:
         self.turtle.speed(3)
 
     def starting_position(self, position):
-        self.turtle.goto(-240, position)
+        self.turtle.goto(position, -290)
+        self.turtle.setheading(90)
 
     def move(self):
         self.turtle.forward(random.randint(1, 10))
@@ -21,7 +22,7 @@ class MakeTurtle:
         self.turtle.pencolor(self.turtle.color()[0])
 
     def is_over(self):
-        if self.turtle.pos()[0] >= 230.0:
+        if self.turtle.pos()[1] >= 290.0:
             # Will return a Truthy Value ending the while loop and giving me the result
             return self.turtle.color()[0]
         else:

@@ -35,13 +35,13 @@ from turtle import Turtle, Screen
 from turtle_class import MakeTurtle
 
 screen = Screen()
-screen.setup(width=500,height=500)
+screen.setup(width=700,height=640)
 position=[-200,-100,0,100,150,200]
 turtles = []
 colors=['blue','red','yellow','green','black','purple']
 for x in range(6):
     turtles.append(MakeTurtle(colors[x]))
-    turtles[x].starting_position(position[x])
+    turtles[x].starting_position(-300+(x*120))
 
 game_running = True
 while game_running:
