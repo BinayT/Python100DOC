@@ -6,9 +6,15 @@ screen.setup(width=600, height=600)
 screen.bgcolor('black')
 screen.title('Snake Game')
 
-turtles = []
+snakes = []
 for x in range(3):
-    turtles.append(Snake(x_pos=0-(x*20), y_pos=0))
+    snakes.append(Snake(x_pos=0 - (x * 20), y_pos=0))
 
-print(turtles)
+game_is_on = True
+while game_is_on:
+    for snake in snakes:
+        snake.turtle.forward(20)
+        if snake.turtle.pos() >= (270, 0):
+            game_is_on = False
+
 screen.exitonclick()
