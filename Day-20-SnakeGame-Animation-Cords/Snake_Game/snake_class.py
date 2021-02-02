@@ -21,6 +21,21 @@ class Snake:
             self.snakes[x].goto(self.snakes[x - 1].pos())
 
         self.snakes[0].forward(MOVE_DISTANCE)
-        if self.snakes[0].pos() >= (270, 0):
-            self.snakes[0].left(90)
+        # if self.snakes[0].pos() >= (270, 0):
+        #     self.snakes[0].left(90)
 
+    def up(self):
+        if self.snakes[0].heading() == 0 or self.snakes[0].heading() == 180:
+            self.snakes[0].setheading(90)
+
+    def down(self):
+        if self.snakes[0].heading() == 0 or self.snakes[0].heading() == 180:
+            self.snakes[0].setheading(270)
+
+    def left(self):
+        if self.snakes[0].heading() == 90 or self.snakes[0].heading() == 270:
+            self.snakes[0].setheading(180)
+
+    def right(self):
+        if self.snakes[0].heading() == 90 or self.snakes[0].heading() == 270:
+            self.snakes[0].setheading(0)
