@@ -18,11 +18,11 @@ while game_is_on:
     time.sleep(0.1)
 
     for x in range(len(snakes)-1, 0, -1):
-        prev_x_cord = snakes[x-1].turtle.xcor()
-        prev_y_cord = snakes[x-1].turtle.ycor()
-        snakes[x].turtle.goto(prev_x_cord, prev_y_cord)
+        snakes[x].turtle.goto(snakes[x-1].turtle.pos())
+
     snakes[0].turtle.forward(20)
-    snakes[0].turtle.left(90)
+    if snakes[0].turtle.pos() >= (270, 0) and snakes[0].turtle.heading() == 0:
+        snakes[0].turtle.left(90)
 
 
 
