@@ -11,6 +11,7 @@ class Snake:
     def __init__(self):
         self.snakes = []
         self.create_snake()
+        self.snakes[0].shape('circle')
         self.head = self.snakes[0]
 
     def create_snake(self):

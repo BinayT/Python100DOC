@@ -8,8 +8,6 @@ from Snake_Game.score_board import Scoreboard
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor('black')
-screen.title('Snake Game')
-screen.tracer(0)
 
 snake = Snake()
 food = Food()
@@ -17,6 +15,8 @@ scoreboard = Scoreboard()
 
 screen.listen()
 screen.onkey(snake.up, 'Up')
+screen.title('Snake Game')
+screen.tracer(0)
 screen.onkey(snake.down, 'Down')
 screen.onkey(snake.left, 'Left')
 screen.onkey(snake.right, 'Right')
@@ -47,10 +47,8 @@ while game_is_on:
     # Detect collision with tail
     # If head collides on any segment of the tail
         # trigger game over
-    for snake_part in snake.snakes:
-        if snake_part == snake.head:
-            pass
-        elif snake.head.distance(snake_part) < 10:
+    for snake_part in snake.snakes[1:]:
+        if snake.head.distance(snake_part) < 10:
             scoreboard.game_over()
             game_is_on = False
 
