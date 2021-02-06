@@ -1,4 +1,5 @@
 from turtle import Turtle
+from consts import PADDLE_CORDS
 
 
 class Paddle(Turtle):
@@ -21,10 +22,10 @@ class Paddle(Turtle):
         if y_pos >= 240:
             return
 
-        if x_pos == -360:
-            self.paddle[0].setpos(-360, y_pos+20)
+        if x_pos == -PADDLE_CORDS:
+            self.paddle[0].setpos(-PADDLE_CORDS, y_pos+20)
         else:
-            self.paddle[0].setpos(350, y_pos+20)
+            self.paddle[0].setpos(PADDLE_CORDS, y_pos+20)
 
     def move_down(self):
         y_pos = self.paddle[0].pos()[1]
@@ -32,8 +33,8 @@ class Paddle(Turtle):
         if y_pos <= -240:
             return
 
-        if x_pos == -360:
-            self.paddle[0].setpos(-360, y_pos-20)
+        if x_pos == -PADDLE_CORDS:
+            self.paddle[0].setpos(-PADDLE_CORDS, y_pos-20)
         else:
-            self.paddle[0].setpos(350, y_pos-20)
+            self.paddle[0].setpos(PADDLE_CORDS, y_pos-20)
 
