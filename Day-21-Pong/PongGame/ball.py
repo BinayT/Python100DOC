@@ -1,7 +1,9 @@
 from turtle import Turtle
+from random import randint
 BALL_COLOR = 'white'
 MAX_MIN_WIDTH = 400
 MAX_MIN_HEIGHT = 300
+randheading = randint(0, 360)
 
 
 class Ball(Turtle):
@@ -10,6 +12,7 @@ class Ball(Turtle):
         self.create_middle_line()
         self.current_ball = None
         self.create_ball()
+        self.y = self.current_ball.pos()[1]
 
     def create_ball(self):
         ball = Turtle('circle')
@@ -18,11 +21,13 @@ class Ball(Turtle):
         self.current_ball = ball
 
     def ball_move(self):
+        global randheading
         ball = self.current_ball
-        new_x = ball.xcor() + 10
-        new_y = ball.xcor() + 10
-        ball.goto(new_x, new_y)
+        if ball.pos()[1] >= MAX_MIN_HEIGHT or ball.pos()[1] <= -MAX_MIN_HEIGHT:
+            randheading = -randheading
 
+        ball.setheading(randheading)
+        ball.fd(20)
 
     def create_middle_line(self):
         line = Turtle()
