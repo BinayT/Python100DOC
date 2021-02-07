@@ -10,24 +10,17 @@ class Ball(Turtle):
     def __init__(self):
         super(Ball, self).__init__()
         self.create_middle_line()
-        self.current_ball = None
-        self.create_ball()
-        self.y = self.current_ball.pos()[1]
-
-    def create_ball(self):
-        ball = Turtle('circle')
-        ball.color(BALL_COLOR)
-        ball.penup()
-        self.current_ball = ball
+        self.color(BALL_COLOR)
+        self.shape('circle')
+        self.penup()
 
     def ball_move(self):
         global randheading
-        ball = self.current_ball
-        if ball.pos()[1] >= MAX_MIN_HEIGHT or ball.pos()[1] <= -MAX_MIN_HEIGHT:
+        if self.pos()[1] >= MAX_MIN_HEIGHT or self.pos()[1] <= -MAX_MIN_HEIGHT:
             randheading = -randheading
-
-        ball.setheading(randheading)
-        ball.fd(20)
+        self.setheading(randheading)
+        self.fd(20)
+        # print(self.pos())
 
     def create_middle_line(self):
         line = Turtle()

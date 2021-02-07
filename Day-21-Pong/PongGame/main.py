@@ -11,10 +11,9 @@ screen.title('Pong Game')
 screen.tracer(0)
 screen.listen()
 
+ball = Ball()
 paddle1 = Paddle(PADDLE_1)
 paddle2 = Paddle(PADDLE_2)
-ball = Ball()
-
 
 screen.onkey(paddle1.move_up, 'Up')
 screen.onkeypress(paddle1.move_up, 'Up')
@@ -31,5 +30,9 @@ while game_is_on:
     sleep(0.1)
     screen.update()
     ball.ball_move()
+    if paddle1.distance(ball) < 51 and ball.pos()[0] <= 360:
+        print("Hi")
+    if paddle2.distance(ball) < 51 and ball.pos()[0] < -340:
+        print("Hi")
 
 screen.exitonclick()
