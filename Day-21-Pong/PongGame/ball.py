@@ -14,13 +14,23 @@ class Ball(Turtle):
         self.shape('circle')
         self.penup()
 
-    def ball_move(self):
+    def ball_move(self, paddle1, paddle2):
         global randheading
         if self.pos()[1] >= MAX_MIN_HEIGHT or self.pos()[1] <= -MAX_MIN_HEIGHT:
             randheading = -randheading
-        self.setheading(randheading)
+            self.setheading(randheading)
+        if paddle1.distance(self) < 51 and self.pos()[0] <= 360:
+            randheading = -randheading
+            self.setheading(randheading)
+        elif paddle2.distance(self) < 51 and self.pos()[0] > -360:
+            randheading = -randheading
+            self.setheading(randheading)
+        else:
+            self.setheading(randheading)
         self.fd(20)
-        # print(self.pos())
+
+    def bounce_x(self):
+        self.setposition(-self.xcor(), self.ycor())
 
     def create_middle_line(self):
         line = Turtle()
