@@ -42,13 +42,15 @@ while game_on:
     if ((ball.xcor() >= BALL_X_MAX and (paddle1.ycor() + 60 > ball.ycor() > paddle1.ycor() - 60)) or
             (ball.xcor() <= -BALL_X_MAX and (paddle2.ycor() + 60 > ball.ycor() > paddle2.ycor() - 60))):
         ball.bounce_paddle()
-        game_sleep_time -= 0.002
+        game_sleep_time -= 0.003
 
     if -360 > ball.xcor() < 0:
         ball.goto(0, 0)
+        game_sleep_time = 0.1
         score2 += 1
     if 0 < ball.xcor() > 360:
         ball.goto(0, 0)
+        game_sleep_time = 0.1
         score1 += 1
 
 
