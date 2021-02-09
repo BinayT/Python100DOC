@@ -36,8 +36,12 @@ class Cars:
                 self.cars.remove(car)
 
     def move_car(self, score):
+        print(len(self.cars))
         for car in self.cars:
             car.fd(5 + score*5)
+            if car.xcor() < -325:
+                self.cars.remove(car)
+                del car
         time.sleep(0.2)
         self.make_random_cars()
 
