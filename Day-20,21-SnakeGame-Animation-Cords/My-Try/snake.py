@@ -31,6 +31,13 @@ class Snake(Turtle):
         snake.goto(self.snake_body[-1].pos())
         self.snake_body.append(snake)
 
+    def snake_reset(self):
+        for x in self.snake_body:
+            x.goto(1000, 1000)
+        self.snake_body.clear()
+        self.snake_body_creator()
+        self.snake_head = self.snake_body[0]
+
     def move(self):
         for x in range(len(self.snake_body)-1, 0, -1):
             self.snake_body[x].setposition(self.snake_body[x-1].pos())
