@@ -10,6 +10,8 @@ game_on = True
 score = 0
 while game_on:
     question = screen.textinput(f"{score}/50  States Correct", "Write a state's name:")
+    if question == 'exit':
+        game_on = False
     answer = question.split(' ')
     definitive_ans = ''
     if len(answer) > 1:
@@ -26,4 +28,4 @@ while game_on:
         data_obj.pop(definitive_ans)
         score += 1
 
-turtle.mainloop()
+screen.exitonclick()
