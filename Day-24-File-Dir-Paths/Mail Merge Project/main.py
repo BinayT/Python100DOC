@@ -19,6 +19,6 @@ with open('./Input/Letters/starting_letter.txt', mode="r") as letter:
                 lista.append(names_list[x][:-1])
 
         for each_name in lista:
-            ind_letter = letter_content.replace('[name]', each_name)
+            individual_letter = letter_content.replace('[name]', each_name)
             with open(f'./Input/Letters/{each_name}.txt', mode='w') as single_letter:
-                single_letter.write(ind_letter)
+                single_letter.write(individual_letter)
