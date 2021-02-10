@@ -20,12 +20,17 @@
 #             individual_obj[data_header[y]] = seperated_data[y]
 #         finished_data_list.append(individual_obj)
 #     print(finished_data_list)
-import csv
 
-with open('weather_data.csv', mode="r") as data_file:
-    data = csv.reader(data_file)
-    lista = []
-    for row in data:
-        if row[1] != 'temp':
-            lista.append(int(row[1]))
-    print(lista)
+# import csv
+#
+# with open('weather_data.csv', mode="r") as data_file:
+#     data = csv.reader(data_file)
+#     lista = []
+#     for row in data:
+#         if row[1] != 'temp':
+#             lista.append(int(row[1]))
+#     print(lista)
+
+import pandas
+data = pandas.read_csv('weather_data.csv')
+print(data['temp'])
