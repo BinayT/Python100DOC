@@ -32,8 +32,8 @@
 #     print(lista)
 
 import pandas
-data = pandas.read_csv('weather_data.csv')
-print(data['temp'].min())
+# data = pandas.read_csv('weather_data.csv')
+# print(data[data.temp == data.temp.max()])
 # list_temp = data['temp'].to_list()
 # sum_of_temps = 0
 #
@@ -41,3 +41,13 @@ print(data['temp'].min())
 #     sum_of_temps += x
 #
 # print(round(sum_of_temps/len(list_temp), 2))
+
+# print(data[data.day == 'Monday'].temp*(9/5)+32)
+
+data_dict = {
+    'students': ['Student1', 'Student2', 'Student3'],
+    'scores': [8, 6, 2]
+}
+
+data = pandas.DataFrame(data_dict)
+print(data)
