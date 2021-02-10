@@ -33,4 +33,11 @@
 
 import pandas
 data = pandas.read_csv('weather_data.csv')
-print(data['temp'])
+print(data['temp'].min())
+# list_temp = data['temp'].to_list()
+# sum_of_temps = 0
+#
+# for x in list_temp:
+#     sum_of_temps += x
+#
+# print(round(sum_of_temps/len(list_temp), 2))
