@@ -1,3 +1,5 @@
+import pandas
+
 # def space_del(data):
 #     return data[:-1]
 #
@@ -31,7 +33,6 @@
 #             lista.append(int(row[1]))
 #     print(lista)
 
-import pandas
 # data = pandas.read_csv('weather_data.csv')
 # print(data[data.temp == data.temp.max()])
 # list_temp = data['temp'].to_list()
@@ -44,10 +45,22 @@ import pandas
 
 # print(data[data.day == 'Monday'].temp*(9/5)+32)
 
-data_dict = {
-    'students': ['Student1', 'Student2', 'Student3'],
-    'scores': [8, 6, 2]
-}
+# data_dict = {
+#     'students': ['Student1', 'Student2', 'Student3'],
+#     'scores': [8, 6, 2]
+# }
+#
+# data = pandas.DataFrame(data_dict)
+# data.to_csv('students_dict.csv')
 
-data = pandas.DataFrame(data_dict)
-data.to_csv('students_dict.csv')
+data = pandas.read_csv('2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv')
+data_gray = data[data['Primary Fur Color'] == 'Gray']
+data_black = data[data['Primary Fur Color'] == 'Black']
+data_cinnamon = data[data['Primary Fur Color'] == 'Cinnamon']
+
+list_data_colors = {'Fur Color': ['grey', 'black', 'red'], 'Count': [len(data_gray), len(data_black),
+                                                                     len(data_cinnamon)]}
+
+data_conversion = pandas.DataFrame(list_data_colors)
+print(data_conversion)
+data_conversion.to_csv('squirrels_color.csv')
