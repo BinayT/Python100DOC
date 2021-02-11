@@ -13,8 +13,8 @@ while game_on:
     question = screen.textinput(f"{score}/50  States Correct", "Write a state's name:")
     if question == 'exit':
         game_on = False
-        file = pandas.DataFrame(data_obj)
-        file.to_csv("results.csv")
+        file = pandas.read_csv('50_states.csv').state
+        file.to_csv(f"results{score}.csv")
 
     answer = question.split(' ')
     definitive_ans = ''
