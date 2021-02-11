@@ -14,7 +14,7 @@ while game_on:
     if question == 'exit':
         game_on = False
         file = pandas.read_csv('50_states.csv').state
-        file.to_csv(f"results{score}.csv")
+        file.to_csv(f"remaining{score-50}states.csv")
 
     answer = question.split(' ')
     definitive_ans = ''
