@@ -18,6 +18,8 @@ weather_c = {
     "Sunday": 24,
 }
 
-weather_f = {key: ((value * 9/5)+32) for (key, value) in weather_c.items()}
+weather_f = {key: (value*9/5)+32 for key, value in weather_c.items()}
+
+# weather_f = {key: ((value * 9/5)+32) for (key, value) in weather_c.items()}
 
 print(weather_f)
