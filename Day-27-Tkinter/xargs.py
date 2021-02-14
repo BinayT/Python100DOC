@@ -5,7 +5,7 @@ def add(*args):
     return total
 
 
-print(add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+# print(add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
 
 
 def calculate(**kwargs):
@@ -13,4 +13,18 @@ def calculate(**kwargs):
         print(f'{key} : {value}')
 
 
-calculate(add=3, multiply=5, substract=6, divide=10)
+# calculate(add=3, multiply=5, subtract=6, divide=10)
+
+class Car:
+    def __init__(self, **kw):
+        self.model = kw['model']
+        self.year = kw['year']
+        self.mileage = kw['model']
+
+    def details_car(self):
+        print(f"Your car is of model {self.model} of year {self.year} and it's mileage is of {self.mileage}km/l.")
+
+
+my_car = Car(model="Toyota", year=1996, mileage=12)
+
+my_car.details_car()
