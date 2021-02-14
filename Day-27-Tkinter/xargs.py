@@ -17,14 +17,14 @@ def calculate(**kwargs):
 
 class Car:
     def __init__(self, **kw):
-        self.model = kw['model']
-        self.year = kw['year']
-        self.mileage = kw['model']
+        self.model = kw.get('model')
+        self.year = kw.get('year')
+        self.mileage = kw.get('model')
 
     def details_car(self):
         print(f"Your car is of model {self.model} of year {self.year} and it's mileage is of {self.mileage}km/l.")
 
 
-my_car = Car(model="Toyota", year=1996, mileage=12)
+my_car = Car(model="Toyota",  mileage=12)
 
 my_car.details_car()
