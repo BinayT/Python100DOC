@@ -16,29 +16,38 @@ window = Tk()
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
-minute = 2
+minutes = 4
 sec = 0
+counts = 0
+study = True
 
 
-def yomama():
-    global minute, sec
-    canvas.itemconfig(timer_text, text=f'{minute}:{sec}')
-    if minute == 0 and sec == 0:
-        return
+def timer_func():
+    global minutes, sec, counts, study
+    canvas.itemconfig(timer_text, text=f'{minutes}:{sec}')
+
+    if minutes == 0 and sec == 0:
+        study = not study
+        if study:
+            minutes = 5
+        else:
+            minutes = 2
+
+    if minutes == 0 and sec == 0:
+        canvas.itemconfig(timer_text, text=f'{minutes}:{sec}')
+
     if sec == 0:
-        sec = 10
-        minute -= 1
+        sec = 5
+        minutes -= 1
     sec -= 1
-    window.after(1000, yomama)
-    print(f'min:{minute} sec:{sec}')
-
+    window.after(1000, timer_func)
+    print(f'min:{minutes} sec:{sec}')
 
 
 # ---------------------------- UI SETUP ------------------------------- #
 
 window.title("Pomodoro")
 window.config(padx=100, pady=60, bg=YELLOW)
-
 
 
 timer = Label(text="Timer", bg=YELLOW, fg=GREEN, font=(FONT_NAME, '24', 'bold'))
@@ -58,6 +67,6 @@ tomato_img = PhotoImage(file='tomato.png')
 canvas.create_image(100, 112, image=tomato_img)
 timer_text = canvas.create_text(103, 130, text='00:00', fill="white", font=(FONT_NAME, 24, "bold"))
 canvas.grid(column=1, row=1)
-yomama()
+timer_func()
 
 window.mainloop()
