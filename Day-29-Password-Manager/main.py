@@ -6,13 +6,18 @@ window = Tk()
 window.title('Password Manager')
 window.config(padx=100, pady=50)
 
-# Random password generator
-
 
 def create_password():
     global RANDOM_PASSWORD
     RANDOM_PASSWORD = random_password_generator()
-    print(RANDOM_PASSWORD)
+    password_entry.insert(END, RANDOM_PASSWORD)
+
+
+def add_to_file():
+    global RANDOM_PASSWORD
+    with open('password.txt', mode='w') as password_file:
+        password_file.write(RANDOM_PASSWORD)
+
 
 # LOGO
 logo = Canvas(height=224, width=200, highlightthickness=0)
@@ -29,6 +34,7 @@ website_entry.grid(column=1, row=1)
 email_username_label = Label(text="Email/Username: ")
 email_username_label.grid(column=0, row=2)
 email_entry = Entry()
+email_entry.insert(END, 'youremail@here.com')
 email_entry.grid(column=1, row=2)
 
 password_label = Label(text="Password: ")
@@ -38,7 +44,7 @@ password_entry.grid(column=1, row=3)
 password_generate_button = Button(text="Generate Password", command=create_password)
 password_generate_button.grid(column=2, row=3)
 
-add_button = Button(text="Add")
+add_button = Button(text="Add", command=add_to_file)
 add_button.grid(column=1, row=4)
 
 
