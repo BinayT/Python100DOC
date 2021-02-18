@@ -28,5 +28,8 @@ password_entry.grid(column=1, row=3)
 password_generate_button = Button(text="Generate Password")
 password_generate_button.grid(column=2, row=3)
 
+add_button = Button(text="Add")
+add_button.grid(column=1, row=4)
+
 
 window.mainloop()
