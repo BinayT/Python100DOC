@@ -28,11 +28,14 @@ def timer_start():
     global REPS_COUNT
     if REPS_COUNT == 4:
         REPS_COUNT = 0
+        headline.config(text=LONG_BREAK_TEXT, fg=RED)
         counter(7 * SECS_IN_MIN)
     elif BREAK:
         counter(2 * SECS_IN_MIN)
+        headline.config(text=SHORT_BREAK_TEXT, fg=PINK)
     else:
-        counter(5 * SECS_IN_MIN)
+        counter(3 * SECS_IN_MIN)
+        headline.config(text=STUDY_TEXT, fg=GREEN)
 
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
@@ -43,25 +46,24 @@ def counter(amount):
     count_mins = math.floor(amount / SECS_IN_MIN)
     count_secs = amount % SECS_IN_MIN
     canvas.itemconfig(timer_text, text=f'{str(count_mins).zfill(2)}:{str(count_secs).zfill(2)}')
+
     print(amount)
     if amount > 0:
         window.after(1000, counter, amount - 1)
     if amount == 0:
         BREAK = not BREAK
         REPS_COUNT += 1 if BREAK else 0
-
-        checkmarks.config(text=f'{REPS_COUNT * "✅"}')
         timer_start()
+        checkmarks.config(text=f'{REPS_COUNT * "✅"}')
 
-
-# ---------------------------- UI SETUP ------------------------------- #
+        # ---------------------------- UI SETUP ------------------------------- #
 
 
 window.title("Pomodoro")
 window.config(padx=100, pady=60, bg=YELLOW)
 
-timer = Label(text="YOU READY?", bg=YELLOW, fg=GREEN, font=(FONT_NAME, '24', 'bold'))
-timer.grid(column=1, row=0)
+headline = Label(text="YOU READY?", bg=YELLOW, fg=GREEN, font=(FONT_NAME, '24', 'bold'))
+headline.grid(column=1, row=0)
 
 start = Button(text="Start", highlightthickness=0, command=timer_start)
 start.grid(row=2, column=0)
