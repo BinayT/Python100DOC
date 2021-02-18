@@ -14,9 +14,8 @@ def create_password():
 
 
 def add_to_file():
-    global RANDOM_PASSWORD
-    with open('password.txt', mode='w') as password_file:
-        password_file.write(RANDOM_PASSWORD)
+    with open('password.txt', mode='a+') as password_file:
+        password_file.write(f'{email_entry.get()} | {password_entry.get()} | {website_entry.get()}\n')
 
 
 # LOGO
