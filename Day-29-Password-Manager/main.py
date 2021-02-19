@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox as mb
 from password_gen import random_password_generator
 
 RANDOM_PASSWORD = None
@@ -16,8 +17,9 @@ def create_password():
 def add_to_file():
     if len(email_entry.get()) == 0 or len(password_entry.get()) == 0  or len(website_entry.get()) == 0:
         return
-    with open('password.txt', mode='a+') as password_file:
-        password_file.write(f'{email_entry.get()} | {password_entry.get()} | {website_entry.get()}\n')
+    if mb.askyesno('Final Step', 'You sure the data are correct?'):
+        with open('password.txt', mode='a+') as password_file:
+            password_file.write(f'{email_entry.get()} | {password_entry.get()} | {website_entry.get()}\n')
 
 
 # LOGO
