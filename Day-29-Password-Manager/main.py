@@ -20,7 +20,9 @@ def add_to_file():
     if mb.askyesno('Final Step', 'You sure the data are correct?'):
         with open('password.txt', mode='a+') as password_file:
             password_file.write(f'{email_entry.get()} | {password_entry.get()} | {website_entry.get()}\n')
-
+        email_entry.delete(0, 'end')
+        password_entry.delete(0, 'end')
+        website_entry.delete(0, 'end')
 
 # LOGO
 logo = Canvas(height=224, width=200, highlightthickness=0)
@@ -37,7 +39,6 @@ website_entry.grid(column=1, row=1)
 email_username_label = Label(text="Email/Username: ")
 email_username_label.grid(column=0, row=2)
 email_entry = Entry()
-email_entry.insert(END, 'youremail@here.com')
 email_entry.grid(column=1, row=2)
 
 password_label = Label(text="Password: ")
