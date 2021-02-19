@@ -14,6 +14,8 @@ def create_password():
 
 
 def add_to_file():
+    if len(email_entry.get()) == 0 or len(password_entry.get()) == 0  or len(website_entry.get()) == 0:
+        return
     with open('password.txt', mode='a+') as password_file:
         password_file.write(f'{email_entry.get()} | {password_entry.get()} | {website_entry.get()}\n')
 
@@ -45,6 +47,5 @@ password_generate_button.grid(column=2, row=3)
 
 add_button = Button(text="Add", command=add_to_file)
 add_button.grid(column=1, row=4)
-
 
 window.mainloop()
