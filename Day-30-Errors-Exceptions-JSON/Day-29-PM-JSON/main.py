@@ -43,6 +43,9 @@ website_label.grid(column=0, row=1)
 website_entry = Entry()
 website_entry.grid(column=1, row=1)
 
+search_button = Button(text="Search", command=add_to_file)
+search_button.grid(column=2, row=1)
+
 email_username_label = Label(text="Email/Username: ")
 email_username_label.grid(column=0, row=2)
 email_entry = Entry()
