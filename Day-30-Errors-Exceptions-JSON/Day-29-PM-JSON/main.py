@@ -29,7 +29,7 @@ def add_to_file():
         website_entry.delete(0, 'end')
 
     if len(email) == 0 or len(password) == 0 or len(website) == 0:
-        mb.showinfo("Opps", "Please make sure you didn't leave anything empty")
+        mb.showinfo("Ops", "Please make sure you didn't leave anything empty")
     else:
         if mb.askyesno('Final Step', 'You sure the data are correct?'):
 
@@ -52,12 +52,12 @@ def search_in_file():
     with open('password.json', mode='r') as password_file:
         json_list = json.load(password_file)
     try:
-        website_credencials = json_list[website]
+        website_credentials = json_list[website]
     except KeyError:
-        mb.showinfo('Opps', f"The credentials for the {website} doesn't exist in the DB")
+        mb.showinfo('Ops', f"The credentials for the {website} doesn't exist in the DB")
     else:
-        mb.showinfo(f"<'{website}'> Credentials", f"Email: {website_credencials['email']}\n"
-                                                  f"Password: {website_credencials['password']}")
+        mb.showinfo(f"<'{website}'> Credentials", f"Email: {website_credentials['email']}\n"
+                                                  f"Password: {website_credentials['password']}")
         website_entry.delete(0, 'end')
 
 
