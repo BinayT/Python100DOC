@@ -22,6 +22,11 @@ def add_to_file():
     email = email_entry.get()
     obj_to_save = {website: {'password': password, 'email': email}}
 
+    def clear_entries():
+        email_entry.delete(0, 'end')
+        password_entry.delete(0, 'end')
+        website_entry.delete(0, 'end')
+
     if len(email) == 0 or len(password) == 0 or len(website) == 0:
         mb.showinfo("Opps", "Please make sure you didn't leave anything empty")
     else:
@@ -33,18 +38,11 @@ def add_to_file():
                     data.update(obj_to_save)
                 with open('password.json', mode='w') as password_file:
                     json.dump(data, password_file, indent=4)
+                    clear_entries()
             else:
                 with open('password.json', mode='w') as password_file:
                     json.dump(obj_to_save, password_file, indent=4)
-
-
-
-            # with open('password.json', mode='w') as password_file:
-            #     json_list.append(obj_to_save)
-            #     json.dump(json_list, password_file,indent=4)
-            # email_entry.delete(0, 'end')
-            # password_entry.delete(0, 'end')
-            # website_entry.delete(0, 'end')
+                    clear_entries()
 
 
 def search_in_file():
