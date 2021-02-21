@@ -23,6 +23,7 @@ def add_to_file():
     obj_to_save = {website: {'password': password, 'email': email}}
 
     def clear_entries():
+        mb.showinfo("Successful", f"The <'{website}'> credentials correctly added to the DB.")
         email_entry.delete(0, 'end')
         password_entry.delete(0, 'end')
         website_entry.delete(0, 'end')
