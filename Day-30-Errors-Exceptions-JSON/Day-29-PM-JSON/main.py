@@ -57,7 +57,7 @@ def search_in_file():
         mb.showinfo('Opps', f"The credentials for the {website} doesn't exist in the DB")
     else:
         mb.showinfo(f"<'{website}'> Credentials", f"Email: {website_credencials['email']}\n"
-                                                             f"Password: {website_credencials['password']}")
+                                                  f"Password: {website_credencials['password']}")
         website_entry.delete(0, 'end')
 
 
