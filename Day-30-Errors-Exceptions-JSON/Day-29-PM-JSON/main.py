@@ -25,11 +25,18 @@ def add_to_file():
         mb.showinfo("Opps", "Please make sure you didn't leave anything empty")
     else:
         if mb.askyesno('Final Step', 'You sure the data are correct?'):
+            with open('password.json', mode='r') as password_file:
+                json_list = json.load(password_file)
             with open('password.json', mode='w') as password_file:
-                json.dump(obj_to_save, password_file, indent=4)
+                json_list.append(obj_to_save)
+                json.dump(json_list, password_file,indent=4)
             email_entry.delete(0, 'end')
             password_entry.delete(0, 'end')
             website_entry.delete(0, 'end')
+
+
+def search_in_file():
+    pass
 
 
 logo = Canvas(height=224, width=200, highlightthickness=0)
@@ -43,7 +50,7 @@ website_label.grid(column=0, row=1)
 website_entry = Entry()
 website_entry.grid(column=1, row=1)
 
-search_button = Button(text="Search", command=add_to_file)
+search_button = Button(text="Search", command=search_in_file)
 search_button.grid(column=2, row=1)
 
 email_username_label = Label(text="Email/Username: ")
