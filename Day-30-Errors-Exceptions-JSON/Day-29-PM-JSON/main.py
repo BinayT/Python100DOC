@@ -51,10 +51,12 @@ def search_in_file():
     with open('password.json', mode='r') as password_file:
         json_list = json.load(password_file)
     try:
-        website_keys = list(json_list.keys())
-        print('facebook' in website_keys)
-    except:
-        pass
+        website_credencials = json_list[website]
+    except KeyError:
+        mb.showinfo('Opps', f"The credencials for the {website} doesn't exist in the DB")
+    else:
+        mb.showinfo(f"The '{website}' does exist in the DB", f"Email: {website_credencials['email']}\n"
+                                                             f"Password: {website_credencials['password']}")
 
 
 logo = Canvas(height=224, width=200, highlightthickness=0)
