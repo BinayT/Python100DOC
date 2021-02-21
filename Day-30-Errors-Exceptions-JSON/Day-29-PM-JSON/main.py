@@ -53,10 +53,11 @@ def search_in_file():
     try:
         website_credencials = json_list[website]
     except KeyError:
-        mb.showinfo('Opps', f"The credencials for the {website} doesn't exist in the DB")
+        mb.showinfo('Opps', f"The credentials for the {website} doesn't exist in the DB")
     else:
-        mb.showinfo(f"The '{website}' does exist in the DB", f"Email: {website_credencials['email']}\n"
+        mb.showinfo(f"<'{website}'> Credentials", f"Email: {website_credencials['email']}\n"
                                                              f"Password: {website_credencials['password']}")
+        website_entry.delete(0, 'end')
 
 
 logo = Canvas(height=224, width=200, highlightthickness=0)
