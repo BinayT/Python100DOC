@@ -36,6 +36,7 @@ def add_to_file():
                 with open('password.json', mode='r') as password_file:
                     data = json.load(password_file)
                     data.update(obj_to_save)
+
                 with open('password.json', mode='w') as password_file:
                     json.dump(data, password_file, indent=4)
                     clear_entries()
@@ -50,7 +51,7 @@ def search_in_file():
     with open('password.json', mode='r') as password_file:
         json_list = json.load(password_file)
     try:
-        website_keys = [key.keys() for key in json_list]
+        website_keys = list(json_list.keys())
         print('facebook' in website_keys)
     except:
         pass
