@@ -1,0 +1,6 @@
+
+time:15:48:40
+Correct Ans:
+[{'thought': 'pensais'}, {'baby': 'bébé'}, {'large': 'gros'}]
+To Learn:
+[{'new': 'nouvelle'}, {'given': 'donne'}, {'let': 'laisser'}]
