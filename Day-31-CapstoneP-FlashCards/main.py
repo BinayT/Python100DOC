@@ -64,7 +64,7 @@ def exit_game():
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         with open(f'{len(TO_LEARN)+len(KNOWS)}-{len(TO_LEARN)}tolearn-{len(KNOWS)}correct.txt', mode="a+") as file:
-            file.write(f'\ntime:{current_time}\nCorrect Ans:\n{KNOWS}\nTo Learn:\n{TO_LEARN}')
+            file.write(f'\ntime:{current_time}\nCorrect Ans:\n{KNOWS}\nTo Learn:\n{TO_LEARN}\n')
             # file.write("YOO")
         logo_img.config(file='')
         canvas.itemconfig(card, image='')
@@ -85,7 +85,7 @@ canvas.grid(column=0, row=0, columnspan=3)
 
 show_french()
 wrong_image = PhotoImage(file='images/wrong.png')
-button_wrong = Button(image=wrong_image, highlightthickness=0, command=user_know)
+button_wrong = Button(image=wrong_image, highlightthickness=0, command=user_dont_know)
 button_wrong.grid(column=0, row=1)
 
 exit_image = PhotoImage(file='images/exit.png')
@@ -93,7 +93,7 @@ button_exit = Button(image=exit_image, highlightthickness=0, command=exit_game)
 button_exit.grid(column=1, row=1)
 
 right_image = PhotoImage(file='images/right.png')
-button_right = Button(image=right_image, highlightthickness=0, command=user_dont_know)
+button_right = Button(image=right_image, highlightthickness=0, command=user_know)
 button_right.grid(column=2, row=1)
 
 window.mainloop()
