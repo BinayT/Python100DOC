@@ -9,6 +9,7 @@ KNOWS = []
 CARD_PATH = 'images/card_back.png'
 CURRENT_LANGUAGE = 'Language'
 CURRENT_WORD = 'Word'
+running = None
 
 with open("data/french_words.csv", "r") as f:
     reader = csv.DictReader(f)
@@ -35,7 +36,7 @@ def show_english():
 
 
 def show_french():
-    global CURRENT_WORD, CARD_PATH, CURRENT_LANGUAGE
+    global CURRENT_WORD, CARD_PATH, CURRENT_LANGUAGE, running
     choose_word()
     CURRENT_WORD = random_word['French']
     CARD_PATH = 'images/card_front.png'
@@ -46,7 +47,7 @@ def show_french():
     canvas.itemconfig(language, text=CURRENT_LANGUAGE)
     canvas.itemconfig(word, text=CURRENT_WORD)
 
-    window.after(3000, show_english)
+    running = window.after(3000, show_english)
 
 
 def user_know():
@@ -61,15 +62,15 @@ def user_dont_know():
 
 def exit_game():
     if mb.askyesno('Quit Game', 'You sure want to quit?'):
+        window.after_cancel(running)
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         with open(f'{len(TO_LEARN)+len(KNOWS)}-{len(TO_LEARN)}tolearn-{len(KNOWS)}correct.txt', mode="a+") as file:
             file.write(f'\ntime:{current_time}\nCorrect Ans:\n{KNOWS}\nTo Learn:\n{TO_LEARN}\n')
-            # file.write("YOO")
-        logo_img.config(file='')
-        canvas.itemconfig(card, image='')
-        canvas.itemconfig(language, text='')
-        canvas.itemconfig(word, text='')
+        logo_img.config(file='images/card_back.png')
+        canvas.itemconfig(card, image=logo_img)
+        canvas.itemconfig(language, text='Language')
+        canvas.itemconfig(word, text='Word')
 
 
 window = Tk()
