@@ -1,0 +1,6 @@
+
+time:18:49:37
+Correct Ans:
+[{'cause': 'cause'}, {'job': 'boulot'}]
+To Learn:
+[{'new': 'nouvelle'}, {'be': 'sois'}, {'body': 'corps'}]
