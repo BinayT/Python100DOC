@@ -38,3 +38,4 @@ if day == 2:
             from_addr=my_email,
             to_addrs='recieveremail@gmail.com',
             msg=f"Subject:Motivational Wednesday\n\n{choice(content_list)}")
+        connection.close()
