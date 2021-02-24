@@ -17,4 +17,6 @@ import datetime as dt
 currentdatetime = dt.datetime.now()
 date = currentdatetime.date()
 time = currentdatetime.time()
+randomdate = dt.datetime(year=1994, month=5, day=25, hour=19, minute=15)
+print(randomdate)
 print(f'{date}, {time}')
