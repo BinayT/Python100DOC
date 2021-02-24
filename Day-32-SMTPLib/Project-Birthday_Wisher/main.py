@@ -12,6 +12,8 @@
 # [Fill this in!]
 
 import csv
+import random
+import datetime
 
 data = []
 run = None
@@ -37,8 +39,11 @@ with open('birthdays.csv', 'a', newline='') as birthday_file:
         csv_writer = csv.writer(birthday_file)
         csv_writer.writerow(item)
 
+letter_template = ['letter_1.txt', 'letter_2.txt', 'letter_3.txt']
+random_letter = random.choice(letter_template)
 
-
-
+current_date = datetime.datetime.now()
+month = current_date.month
+day = current_date.day
 
 
