@@ -12,11 +12,14 @@ BARCELONA_LONG = 2.173404
 
 barcelona_sunset_sunrise_params = {
     "lat": BARCELONA_LAT,
-    "lng": BARCELONA_LONG
+    "lng": BARCELONA_LONG,
+    "formatted": 0
 }
 
 sun_sunset_sunrise_apicall = requests.get(f'https://api.sunrise-sunset.org/json', params=barcelona_sunset_sunrise_params)
 sun_sunset_sunrise_apicall_res = sun_sunset_sunrise_apicall.json()
 sun_sunset_sunrise_apicall.raise_for_status()
-print(sun_sunset_sunrise_apicall_res)
+sunrise = sun_sunset_sunrise_apicall_res['results']['sunrise']
+sunset = sun_sunset_sunrise_apicall_res['results']['sunset']
+print(sunset.split('T')[1].split(':')[0])
 
