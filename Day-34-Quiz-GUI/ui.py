@@ -16,10 +16,10 @@ class QuizInterface:
                                                    text="Hello there")
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
         false_image = PhotoImage(file="images/false.png")
-        self.wrong_button = Button(image=false_image)
+        self.wrong_button = Button(image=false_image, highlightthickness=0)
         self.wrong_button.grid(row=2, column=0)
         true_image = PhotoImage(file="images/true.png")
-        self.right_button = Button(image=true_image)
+        self.right_button = Button(image=true_image, highlightthickness=0)
         self.right_button.grid(row=2, column=1)
         self.window.mainloop()
 
