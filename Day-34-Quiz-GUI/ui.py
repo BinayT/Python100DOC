@@ -13,7 +13,7 @@ class QuizInterface:
         self.score_label.config(bg=THEME_COLOR)
         self.score_label.grid(row=0, column=1)
         self.canvas = Canvas(width=300, height=250, highlightthickness=0)
-        self.canvas_text = self.canvas.create_text(150, 125, width=300, font=("Arial", 20, 'italic'),
+        self.canvas_text = self.canvas.create_text(150, 125, width=280, font=("Arial", 20, 'italic'),
                                                    text="")
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
         false_image = PhotoImage(file="images/false.png")
