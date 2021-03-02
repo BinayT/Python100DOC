@@ -10,8 +10,9 @@ for question in questions:
     new_question = Question(question_text, question_answer)
     question_bank.append(new_question)
 
-quiz = QuizInterface()
-# quiz = QuizBrain(question_bank)
+quiz = QuizBrain(question_bank)
+quiz_ui = QuizInterface(quiz)
+
 #
 # while quiz.still_has_questions():
 #     quiz.next_question()
