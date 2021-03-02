@@ -9,7 +9,7 @@ class QuizInterface:
         self.window.title('Quizzler')
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
         self.score = self.quiz.score
-        self.score_label = Label(text=f"Score: {self.score}")
+        self.score_label = Label(text=f"Score: {self.score}/10")
         self.score_label.config(bg=THEME_COLOR)
         self.score_label.grid(row=0, column=1)
         self.canvas = Canvas(width=300, height=250, highlightthickness=0)
@@ -30,8 +30,9 @@ class QuizInterface:
         self.canvas.itemconfig(self.canvas_text, text=text)
 
     def false_ans(self):
-        yoo = self.quiz.check_answer('False')
+        self.show_question()
 
     def true_ans(self):
         score = self.quiz.check_answer('True')
-        self.score_label.config(text=f"Score: {score}")
+        self.score_label.config(text=f"Score: {score}/10")
+        self.show_question()
