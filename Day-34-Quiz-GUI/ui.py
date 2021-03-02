@@ -8,7 +8,7 @@ class QuizInterface:
         self.quiz = quiz
         self.window.title('Quizzler')
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
-        self.score = 0
+        self.score = self.quiz.score
         self.score_label = Label(text=f"Score: {self.score}")
         self.score_label.config(bg=THEME_COLOR)
         self.score_label.grid(row=0, column=1)
@@ -17,10 +17,10 @@ class QuizInterface:
                                                    text="")
         self.canvas.grid(row=1, column=0, columnspan=2, pady=50)
         false_image = PhotoImage(file="images/false.png")
-        self.wrong_button = Button(image=false_image, highlightthickness=0)
+        self.wrong_button = Button(image=false_image, highlightthickness=0, command=self.false_ans)
         self.wrong_button.grid(row=2, column=0)
         true_image = PhotoImage(file="images/true.png")
-        self.right_button = Button(image=true_image, highlightthickness=0)
+        self.right_button = Button(image=true_image, highlightthickness=0, command=self.true_ans)
         self.right_button.grid(row=2, column=1)
         self.show_question()
         self.window.mainloop()
@@ -29,4 +29,9 @@ class QuizInterface:
         text = self.quiz.next_question()
         self.canvas.itemconfig(self.canvas_text, text=text)
 
+    def false_ans(self):
+        yoo = self.quiz.check_answer('False')
 
+    def true_ans(self):
+        score = self.quiz.check_answer('True')
+        self.score_label.config(text=f"Score: {score}")
