@@ -29,10 +29,32 @@ class QuizInterface:
         text = self.quiz.next_question()
         self.canvas.itemconfig(self.canvas_text, text=text)
 
+    def check_final_question(self):
+        if not self.quiz.still_has_questions():
+            if self.score >= 8:
+                text = f"You got {self.score}. Super DAMN INTELLIGENT."
+            elif 5 < self.score < 8:
+                text = f"You got {self.score}. Not bad ;)."
+            else:
+                text = f"You got {self.score}. Got to improve :P."
+            self.canvas.itemconfig(self.canvas_text, text=text)
+            return False
+        else:
+            print(self.score)
+            return True
+
     def false_ans(self):
-        self.show_question()
+        if self.check_final_question():
+            self.show_question()
+        else:
+            self.wrong_button['state'] = DISABLED
+            self.right_button['state'] = DISABLED
 
     def true_ans(self):
-        score = self.quiz.check_answer('True')
-        self.score_label.config(text=f"Score: {score}/10")
-        self.show_question()
+        if self.check_final_question():
+            self.score = self.quiz.check_answer('True')
+            self.score_label.config(text=f"Score: {self.score}/10")
+            self.show_question()
+        else:
+            self.wrong_button['state'] = DISABLED
+            self.right_button['state'] = DISABLED
