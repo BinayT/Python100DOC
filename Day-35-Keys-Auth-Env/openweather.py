@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import requests
-from apikey import KEY, TWILIO_SID, TWILIO_AUTH_TOKEN
+from apikey import OPEN_WEATHER_KEY, TWILIO_SID, TWILIO_AUTH_TOKEN, MY_NUMBER, TO_NUMBER
 from twilio.rest import Client
 
 data_onecall_api_params = {
     'lat': 39.215231,
     'lon': -8.072670,
-    'appid': KEY,
+    'appid': OPEN_WEATHER_KEY,
     "units": 'metric',
     "exclude": 'current,daily,alerts,minutely'
 }
@@ -24,9 +24,9 @@ client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 if len(weather_12_hours) > 0:
     message = client.messages \
         .create(
-        body="Trying Twilio.",
-        from_='MyNumber',
-        to='DestinationNumber'
+        body="Just trying twilio ;)",
+        from_=MY_NUMBER,
+        to=TO_NUMBER
     )
 
 # if data_current_weather["cod"] != 200:

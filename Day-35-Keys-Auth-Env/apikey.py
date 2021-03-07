@@ -1,3 +1,5 @@
-KEY = '2a6d8d89dbf667f0ca5adec338f22c19'
+OPEN_WEATHER_KEY = ''
 TWILIO_SID = ""
 TWILIO_AUTH_TOKEN = ""
+MY_NUMBER = 'My num'
+TO_NUMBER = 'To Num'
