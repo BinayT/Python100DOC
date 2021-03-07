@@ -1,22 +1,32 @@
 import requests
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-ALPHAVANTAGE_API_KEY = 'W0T2JAYH9528ZU2G'
 
-data = requests.get(f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSLA'
-                    f'&apikey={ALPHAVANTAGE_API_KEY}').json()
 
-daily_data = data['Time Series (Daily)']
+data_alphavantage = requests.get(f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSLA'
+                                 f'&apikey={ALPHAVANTAGE_API_KEY}').json()
+data_newsapi = requests.get(f'https://newsapi.org/v2/everything?q=tesla&apiKey={NEWSAPI_API}').json()
+
+daily_data = data_alphavantage['Time Series (Daily)']
 daily_data_list = list(daily_data.keys())
 yesterday_close = float(daily_data[daily_data_list[0]]['4. close'])
 before_yesterday_close = float(daily_data[daily_data_list[1]]['4. close'])
 variation = yesterday_close - before_yesterday_close
-if variation > 0:
-    if before_yesterday_close*0.02 < variation:
-        print("Positive. Get News")
-else:
-    if yesterday_close * 0.02 < -variation:
-        print("Negative. Get news")
+
+def get_news():
+    for data in data_newsapi['articles'][:3]:
+        print(f"Title: {data['title']}\nDescription: {data['description']}\n")
+
+get_news()
+
+# if variation > 0:
+#     if before_yesterday_close*0.02 < variation:
+#         print("Positive. Get News")
+# else:
+#     if yesterday_close * 0.02 < -variation:
+#         print("Negative. Get news")
+
+
 
 
 ## STEP 1: Use https://www.alphavantage.co
