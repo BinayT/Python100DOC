@@ -4,7 +4,12 @@ from twilio.rest import Client
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
-
+ALPHAVANTAGE_API_KEY = ''
+NEWSAPI_API = ''
+TWILIO_SID = ""
+TWILIO_AUTH_TOKEN = ""
+MY_FAKE_NUM = ''
+MY_REAL_NUM = ''
 TEXT_TO_WRITE = ''
 
 data_alphavantage = requests.get(f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=TSLA'
