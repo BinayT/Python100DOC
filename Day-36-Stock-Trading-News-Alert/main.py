@@ -12,21 +12,22 @@ daily_data_list = list(daily_data.keys())
 yesterday_close = float(daily_data[daily_data_list[0]]['4. close'])
 before_yesterday_close = float(daily_data[daily_data_list[1]]['4. close'])
 variation = yesterday_close - before_yesterday_close
+yesterday_win_percentage = round((variation/before_yesterday_close) * 100, 2)
+before_yesterday_win_percentage = round((-variation/before_yesterday_close) * 100, 2)
+
 
 def get_news():
     for data in data_newsapi['articles'][:3]:
-        print(f"Title: {data['title']}\nDescription: {data['description']}\n")
-
-get_news()
-
-# if variation > 0:
-#     if before_yesterday_close*0.02 < variation:
-#         print("Positive. Get News")
-# else:
-#     if yesterday_close * 0.02 < -variation:
-#         print("Negative. Get news")
+        print(f"Title: {data['title']}\nDescription: {data['description']}\n---------------------------------"
+              f"-----------------------------------------------------------------------------------------------")
 
 
+if variation > 0:
+    print("Tesla Going Up!!!. Here are some hottest news.")
+    print(f'Up {yesterday_win_percentage}')
+else:
+    print("Tesla's going down. Here are some news.")
+    print(f'Down {before_yesterday_win_percentage}')
 
 
 ## STEP 1: Use https://www.alphavantage.co
