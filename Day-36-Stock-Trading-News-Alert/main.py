@@ -42,7 +42,6 @@ else:
     get_news(False)
 
 
-
 client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
 client.messages \
         .create(
