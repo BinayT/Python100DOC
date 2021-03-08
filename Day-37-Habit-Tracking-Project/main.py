@@ -2,6 +2,7 @@ import requests
 
 USERNAME = 'binay'
 Token = "binaytoken"
+GRAPH_ID = "graph1"
 
 
 pixela_endpoint = 'https://pixe.la/v1/users'
@@ -30,5 +31,15 @@ headers = {
 
 graph_endpoint = f'{pixela_endpoint}/{USERNAME}/graphs'
 
-post_graph = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
-print(post_graph.text)
+# post_graph = requests.post(url=graph_endpoint, json=graph_config, headers=headers)
+# print(post_graph.text)
+
+pixel_params = {
+    'date': '20200309',
+    'quantity': '20'
+}
+
+pixel_endpoint = f'{pixela_endpoint}/{USERNAME}/graphs/{GRAPH_ID}'
+
+post_pixel = requests.post(url=pixel_endpoint, json=pixel_params, headers=headers)
+print(post_pixel.text)
