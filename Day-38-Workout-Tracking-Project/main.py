@@ -29,7 +29,7 @@ response_from_nutritionix = post_to_nutritionix.json()
 # exercise_name = exercises.user_input, duration = exercises.duration_min, calories = exercises.nf_calories
 
 sheety_headers = {
-    "Authorization": ""
+    "Authorization": "Basic =="
 }
 
 for exercises in response_from_nutritionix['exercises']:
