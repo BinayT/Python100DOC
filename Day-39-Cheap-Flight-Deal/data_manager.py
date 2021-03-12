@@ -7,7 +7,19 @@ HEADERS = {
 
 class DataManager:
     # This class is responsible for talking to the Google Sheet.
+    def __init__(self):
+        self.cities_w_id = requests.get(url=SHEETY_ENDPOINT, headers=HEADERS).json()['prices']
+
     def get_data(self):
-        cities = requests.get(url=SHEETY_ENDPOINT, headers=HEADERS).json()['prices']
-        cities_names = [city['city'] for city in cities]
+        cities_names = [city['city'] for city in self.cities_w_id]
         return cities_names
+
+    def post_data(self, city_iata):
+        for x in range(len(self.cities_w_id)):
+            body = {
+                "price": {
+                    "iataCode": city_iata[x]
+                }
+            }
+            city_code = requests.put(url=f"{SHEETY_ENDPOINT}/{self.cities_w_id[x]['id']}", headers=HEADERS, json=body)
+            print(city_code.text)
