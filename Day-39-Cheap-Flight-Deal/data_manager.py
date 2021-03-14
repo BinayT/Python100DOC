@@ -1,7 +1,7 @@
 import requests
 SHEETY_ENDPOINT = "https://api.sheety.co/28b51b82d298a761f7348503bed09834/flightDeals/prices"
 HEADERS = {
-    "Authorization": "Basic YmluYXk6MTIzYWJjZA=="
+    "Authorization": "Basic =="
 }
 
 
@@ -10,9 +10,13 @@ class DataManager:
     def __init__(self):
         self.cities_w_id = requests.get(url=SHEETY_ENDPOINT, headers=HEADERS).json()['prices']
 
-    def get_data(self):
-        cities_names = [city['city'] for city in self.cities_w_id]
+    def get_cities(self):
+        cities_names = [city for city in self.cities_w_id]
         return cities_names
+
+    def get_all_data(self):
+        return self.cities_w_id
+
 
     def post_data(self, city_iata):
         for x in range(len(self.cities_w_id)):
