@@ -11,7 +11,8 @@ class FlightData:
     def hit_endpoint(self, params):
         return requests.get(url=TEQUILA_ENDPOINT, headers=HEADERS, params=params).json()
 
-    def search_flights(self):
+    def search_cheap_flights(self):
+        cheap_flight_list = []
         for city in self.data:
             params = {
                 "fly_from": "BCN",
@@ -34,6 +35,7 @@ class FlightData:
                 return_local = flights['route'][-1]['local_arrival'][:10]
 
                 if data_lowest_price <= user_lowest_price:
-                    print(f'{city_from} -- {city_to}, {departure_local} -- {return_local}'
-                          f'-- Price: {data_lowest_price} euro')
+                    cheap_flight_list.append(f'{city_from} --> {city_to}, {departure_local} --> {return_local}'
+                                             f'-- Price: {data_lowest_price} EUR')
                     break
+        return cheap_flight_list
