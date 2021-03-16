@@ -15,13 +15,14 @@ class FlightData:
         cheap_flight_list = []
         for city in self.data:
             params = {
-                "fly_from": "BCN",
+                "fly_from": "LON",
                 "fly_to": city['iataCode'],
-                "date_from": "15/03/2021",
-                "date_to": "15/09/2021",
+                "date_from": "20/03/2021",
+                "date_to": "20/09/2021",
                 "flight_type": "round",
                 "nights_in_dst_from": 7,
-                "nights_in_dst_to": 28
+                "nights_in_dst_to": 28,
+                "max_stopovers": 0
             }
 
             search_data = self.hit_endpoint(params)['data']

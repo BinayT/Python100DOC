@@ -1,7 +1,7 @@
 import requests
 SHEETY_ENDPOINT = "https://api.sheety.co/28b51b82d298a761f7348503bed09834/flightDeals/prices"
 HEADERS = {
-    "Authorization": "Basic =="
+    "Authorization": "Basic ="
 }
 
 
