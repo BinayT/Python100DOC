@@ -21,6 +21,7 @@ flight_search = FlightSearch(cities)
 # Initializing FlightData class and passing cities list as argument.
 user_flight_data_search = FlightData(cities_all_datas)
 cheap_flights_list = user_flight_data_search.search_cheap_flights()
+print(cheap_flights_list)
 
 # This function is responsible for search the IATA code for each city
 # cities_codes = flight_search.search_iata_of_cities()
@@ -29,6 +30,6 @@ cheap_flights_list = user_flight_data_search.search_cheap_flights()
 # sheety_data_manager.post_data(cities_codes)
 
 # This sends the list of cheap flights list to the email sending class
-send_notification = NotificationManager(cheap_flights_list)
-if len(cheap_flights_list) > 0:
-    send_notification.send_msg()
+# send_notification = NotificationManager(cheap_flights_list)
+# if len(cheap_flights_list) > 0:
+#     send_notification.send_msg()
