@@ -25,4 +25,4 @@ class DataManager:
     def get_users_from_sheety(self):
         self.google_sheet_users = requests.get(url=f'{SHEETY_ENDPOINT}/users',
                                                headers=SHEETY_AUTHORIZATION).json()['users']
-        print(self.google_sheet_users)
+        return self.google_sheet_users

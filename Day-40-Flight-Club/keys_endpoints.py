@@ -12,4 +12,6 @@ TWILIO_AUTH_TOKEN = ''
 TWILIO_NUMBER = '+'
 TWILIO_MSG_TO = '+'
 
+MY_EMAIL = 'email@gmail.com'
+PASSWORD = 'password'
 '''
