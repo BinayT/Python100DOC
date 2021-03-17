@@ -19,19 +19,21 @@ if sheety_data[0]['iataCode'] == '':
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6 * 30))
 
-message = ''
-for city_data in sheety_data:
-    flights = flight_search.check_flights(
-        from_city=ORIGIN_CITY,
-        to_city=city_data['iataCode'],
-        from_date=tomorrow,
-        to_date=six_month_from_today
-    )
-    if flights is None:
-        continue
-    if flights.price < city_data['lowestPrice']:
-        message += f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} ---> ' \
-                  f'{flights.destination_city}-{flights.destination_airport} just for {flights.price} EURO\n\n'
+sheety_data_manager.get_users_from_sheety()
 
-if message != '':
-    NotificationManager().send_message(message)
+# message = ''
+# for city_data in sheety_data:
+#     flights = flight_search.check_flights(
+#         from_city=ORIGIN_CITY,
+#         to_city=city_data['iataCode'],
+#         from_date=tomorrow,
+#         to_date=six_month_from_today
+#     )
+#     if flights is None:
+#         continue
+#     if flights.price < city_data['lowestPrice']:
+#         message += f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} ---> ' \
+#                   f'{flights.destination_city}-{flights.destination_airport} just for {flights.price} EURO\n\n'
+#
+# if message != '':
+#     NotificationManager().send_message(message)
