@@ -19,9 +19,13 @@ tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6 * 30))
 
 for city_data in sheety_data:
-    flight_search.check_flights(
+    flights = flight_search.check_flights(
         from_city=ORIGIN_CITY,
         to_city=city_data['iataCode'],
         from_date=tomorrow,
         to_date=six_month_from_today
     )
+
+    if flights.price < city_data['lowestPrice']:
+        print(f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} to '
+              f'{flights.destination_city}-{flights.destination_airport} just for {flights.price}')
