@@ -27,7 +27,8 @@ for city_data in sheety_data:
         from_date=tomorrow,
         to_date=six_month_from_today
     )
-
+    if flights is None:
+        continue
     if flights.price < city_data['lowestPrice']:
         message += f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} ---> ' \
                   f'{flights.destination_city}-{flights.destination_airport} just for {flights.price} EURO\n\n'

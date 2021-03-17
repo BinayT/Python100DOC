@@ -23,6 +23,7 @@ class FlightSearch:
             'date_to': to_date.strftime("%d/%m/%Y"),
             'nights_in_dst_from': 7,
             'nights_in_dst_to': 28,
+            "max_stopovers":0
         }
 
         response = requests.get(url=f"{TEQUILA_ENDPOINT}/v2/search", headers=TEQUILA_HEADERS, params=params).json()
@@ -32,16 +33,16 @@ class FlightSearch:
         except IndexError:
             print(f'No flights for {from_city} -- {to_city}')
             return None
-
-        flight_data = FlightData(
-            price=data['price'],
-            origin_city=data['route'][0]['cityFrom'],
-            destination_city=data['route'][0]['cityTo'],
-            origin_airport=data['route'][0]['flyFrom'],
-            destination_airport=data['route'][0]['flyTo'],
-            flight_date=data['route'][0]['local_departure'].split("T")[0],
-            return_date=data['route'][1]['local_departure'].split("T")[0],
-        )
-        return flight_data
+        else:
+            flight_data = FlightData(
+                price=data['price'],
+                origin_city=data['route'][0]['cityFrom'],
+                destination_city=data['route'][0]['cityTo'],
+                origin_airport=data['route'][0]['flyFrom'],
+                destination_airport=data['route'][0]['flyTo'],
+                flight_date=data['route'][0]['local_departure'].split("T")[0],
+                return_date=data['route'][1]['local_departure'].split("T")[0],
+            )
+            return flight_data
 
 
