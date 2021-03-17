@@ -1,5 +1,6 @@
 from data_manager import DataManager
 from flight_search import FlightSearch
+from notification_manager import NotificationManager
 from datetime import datetime, timedelta
 
 ORIGIN_CITY = "BCN"
@@ -18,6 +19,7 @@ if sheety_data[0]['iataCode'] == '':
 tomorrow = datetime.now() + timedelta(days=1)
 six_month_from_today = datetime.now() + timedelta(days=(6 * 30))
 
+message = ''
 for city_data in sheety_data:
     flights = flight_search.check_flights(
         from_city=ORIGIN_CITY,
@@ -27,5 +29,8 @@ for city_data in sheety_data:
     )
 
     if flights.price < city_data['lowestPrice']:
-        print(f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} to '
-              f'{flights.destination_city}-{flights.destination_airport} just for {flights.price}')
+        message += f'Cheap Flight Alert...\nFrom {flights.origin_city}-{flights.origin_airport} ---> ' \
+                  f'{flights.destination_city}-{flights.destination_airport} just for {flights.price} EURO\n\n'
+
+if message != '':
+    NotificationManager().send_message(message)
