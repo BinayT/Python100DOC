@@ -1,5 +1,3 @@
-
-
 '''
 SHEETY_ENDPOINT = 'https://api.sheety.co/ba0271a66d702e6409e098c3c4a7610f/flightDeals/'
 SHEETY_AUTHORIZATION = {'Authorization': 'Basic '}
