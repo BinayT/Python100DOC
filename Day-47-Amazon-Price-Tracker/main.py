@@ -4,4 +4,5 @@ product_url = None
 
 
 amazon_scrapper = AmazonScrapper()
-amazon_scrapper.get_product_price()
+data = amazon_scrapper.get_product_price()
+print(data)
