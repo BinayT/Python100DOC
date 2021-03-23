@@ -15,4 +15,6 @@ class AmazonScrapper:
         data = requests.get(url=user_product_url, headers=headers)
         soup = BS(data.content, "html.parser")
         price = soup.find(id="priceblock_dealprice").getText()
+        yo = soup.find(class_="priceBlockStrikePriceString").getText()
+        print(yo)
         print(price)
