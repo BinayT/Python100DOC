@@ -18,8 +18,9 @@ class AmazonScrapper:
         try:
             previous_price = soup.find(id="priceblock_dealprice").getText().replace(u'\xa0', u' ').split()[0]
             deal_price = soup.find(class_="priceBlockStrikePriceString").getText().replace(u'\xa0', u' ').split()[0]
+            product_name = soup.find(id='productTitle').getText().replace(u'\n', u'')
         except AttributeError:
             pass
         else:
-            data_to_send = [float(previous_price.replace(',', '.')), float(deal_price.replace(',', '.'))]
+            data_to_send = [float(previous_price.replace(',', '.')), float(deal_price.replace(',', '.')), product_name]
             return data_to_send
