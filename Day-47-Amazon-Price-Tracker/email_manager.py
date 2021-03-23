@@ -1,11 +1,14 @@
 import smtplib
-MY_EMAIL = 'sender@email.com'
-MY_PASSWORD = 'senderemailpassword'
+MY_EMAIL = ''
+MY_PASSWORD = ''
+TO_EMAIL = ''
+
 
 class EmailManager:
-    def __init__(self, list_of_prices):
-        self.previous_price = list_of_prices[0]
-        self.deal_price = list_of_prices[1]
+    def __init__(self, product_details):
+        self.previous_price = product_details[0]
+        self.deal_price = product_details[1]
+        self.product_name = product_details[2].encode('utf-8')
 
     def send_message(self):
         connection = smtplib.SMTP('smtp.gmail.com')
@@ -13,6 +16,7 @@ class EmailManager:
         connection.login(user=MY_EMAIL, password=MY_PASSWORD)
         connection.sendmail(
             from_addr=MY_EMAIL,
-            to_addrs=MY_EMAIL,
-            msg=f'Subject:Deal for\n\nThis msg is sent using SMTP library of Python.\n{dt.datetime.now().date()}')
+            to_addrs=TO_EMAIL,
+            msg=f'Subject:Deal for {self.product_name}\n\nThere is a great deal today for the mentioned product that '
+                f'you wanted to buy.\nPrevious Price: {self.previous_price}EURO ---> Current Price: {self.deal_price}EURO')
         connection.close()
