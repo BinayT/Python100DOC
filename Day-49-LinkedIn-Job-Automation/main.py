@@ -2,10 +2,10 @@ from selenium_driver import driver
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 url = 'https://www.linkedin.com'
-email = '@gmail.com'
-password = ''
-job_title = 'React Developer'
-job_location = 'Barcelona, Catalonia, Spain'
+email = 'youremail@gmail.com'
+password = 'your password'
+job_title = 'Your Job Title'
+job_location = 'Your Location'
 
 # Gets inside LinkedIn
 driver.get(url)
@@ -25,7 +25,7 @@ password_input = driver.find_element_by_id('password')
 password_input.send_keys(password)
 
 driver.find_element_by_xpath('//*[@id="organic-div"]/form/div[3]/button').click()
-sleep(2)
+sleep(3)
 
 driver.find_element_by_class_name('msg-overlay-bubble-header').click()
 sleep(0.5)
@@ -49,16 +49,25 @@ driver.find_element_by_xpath('//span[text()="Most recent"]').click()
 
 driver.find_element_by_xpath('//span[text()="Show results"]').click()
 sleep(2)
-job_cards = driver.find_element_by_class_name('job-card-container').click()
 
-apply_now = driver.find_element_by_xpath('//span[text()="Apply now"]').click()
+job_cards = driver.find_elements_by_class_name('job-card-container')
 
-try:
-    submit_application = driver.find_element_by_xpath('//span[text()="Submit application"]')
-except NoSuchElementException:
-    driver.find_element_by_xpath('//button[@aria-label="Dismiss"]').click()
-    sleep(1)
-    driver.find_element_by_xpath('//span[text()="Discard"]').click()
-else:
-    driver.find_element_by_xpath('//label[contains(text()="Follow")]').click()
-    submit_application.click()
+for jobs in job_cards:
+    jobs.click()
+    sleep(3)
+    try:
+        apply_now = driver.find_element_by_xpath('//span[text()="Apply now"]').click()
+    except NoSuchElementException:
+        pass
+    else:
+        try:
+            submit_application = driver.find_element_by_xpath('//span[text()="Submit application"]')
+        except NoSuchElementException:
+            driver.find_element_by_xpath('//button[@aria-label="Dismiss"]').click()
+            sleep(1)
+            driver.find_element_by_xpath('//span[text()="Discard"]').click()
+        else:
+            submit_application.click()
+            sleep(3)
+            driver.find_element_by_xpath('//button[@aria-label="Dismiss"]').click()
+
