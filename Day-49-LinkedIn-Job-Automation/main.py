@@ -1,11 +1,7 @@
 from selenium_driver import driver
 from selenium.common.exceptions import NoSuchElementException
 from time import sleep
-url = 'https://www.linkedin.com'
-email = 'youremail@gmail.com'
-password = 'your password'
-job_title = 'Your Job Title'
-job_location = 'Your Location'
+from data import url, email, password, job_title, job_location
 
 # Gets inside LinkedIn
 driver.get(url)
@@ -20,9 +16,11 @@ click_login_button = driver.find_element_by_xpath('/html/body/nav/div/a[2]').cli
 # Finds email and password input fields and it sends the respective
 email_input = driver.find_element_by_id('username')
 email_input.send_keys(email)
+sleep(0.5)
 
 password_input = driver.find_element_by_id('password')
 password_input.send_keys(password)
+sleep(0.5)
 
 driver.find_element_by_xpath('//*[@id="organic-div"]/form/div[3]/button').click()
 sleep(3)
@@ -31,7 +29,7 @@ driver.find_element_by_class_name('msg-overlay-bubble-header').click()
 sleep(0.5)
 
 driver.find_element_by_link_text('Jobs').click()
-sleep(4)
+sleep(2)
 
 job_title_input = driver.find_element_by_xpath("//input[starts-with(@id, 'jobs-search-box-keyword')]")
 job_title_input.send_keys(job_title)
@@ -54,9 +52,10 @@ job_cards = driver.find_elements_by_class_name('job-card-container')
 
 for jobs in job_cards:
     jobs.click()
-    sleep(3)
+    sleep(2)
     try:
         apply_now = driver.find_element_by_xpath('//span[text()="Apply now"]').click()
+        sleep(1)
     except NoSuchElementException:
         pass
     else:
@@ -68,6 +67,5 @@ for jobs in job_cards:
             driver.find_element_by_xpath('//span[text()="Discard"]').click()
         else:
             submit_application.click()
-            sleep(3)
+            sleep(2)
             driver.find_element_by_xpath('//button[@aria-label="Dismiss"]').click()
-

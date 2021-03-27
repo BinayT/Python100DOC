@@ -1,0 +1,5 @@
+url = 'https://www.linkedin.com'
+email = 'youremail@gmail.com'
+password = 'password'
+job_title = 'Preferred Job Title'
+job_location = 'Location'
