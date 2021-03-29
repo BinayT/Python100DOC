@@ -2,8 +2,8 @@ from selenium_driver import driver
 from time import sleep
 from selenium.common.exceptions import ElementClickInterceptedException
 url = 'https://www.tinder.com'
-email = 'email@gmail.com'
-password = 'password'
+email = '@gmail.com'
+password = ''
 
 
 driver.get(url)
