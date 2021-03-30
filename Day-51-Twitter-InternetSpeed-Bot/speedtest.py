@@ -23,7 +23,7 @@ class SpeedTest:
         self.driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/div[3]/div[1]/a/span[4]')\
             .click()
 
-        sleep(40)
+        sleep(45)
 
         self.distributor_name = self.driver.find_element_by_xpath('//*[@id="container"]/div/div[3]/div/div/div/div[2]/'
                                                              'div[3]/div[3]/div/div[4]/div/div[2]/div/div[1]'
