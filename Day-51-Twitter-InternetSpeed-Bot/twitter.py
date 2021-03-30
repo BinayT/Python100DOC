@@ -34,4 +34,6 @@ class Twitter:
         write_internet_speed = self.driver.find_element_by_class_name('public-DraftStyleDefault-block')
         write_internet_speed.send_keys(f"{current_date_time}\nThe internet's speed is\nPing:{data['ping']}\nDownload Speed"
                                        f": {data['download_speed']}\nUpload Speed: {data['upload_speed']}")
-        self.driver.find_element_by_xpath('//span[text()="Tweet"]').click()
+        sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="react-root"]/div/div/div[2]/main/div/div/div/div/div/div[2]/div'
+                                          '/div[2]/div[1]/div/div/div/div[2]/div[4]/div/div/div[2]/div[3]').click()
