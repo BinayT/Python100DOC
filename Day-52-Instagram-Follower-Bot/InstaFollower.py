@@ -20,5 +20,12 @@ class InstaFollower:
         sleep(2)
         driver.find_element_by_xpath('//button[text()="Not Now"]').click()
 
-
-
+    def find_followers(self):
+        driver.find_element_by_xpath('//span[text()="Search"]').click()
+        sleep(0.5)
+        search_input = driver.find_element_by_xpath("//input[@placeholder='Search']")
+        search_input.send_keys(ACC_TO_SEARCH)
+        sleep(2)
+        search_input.send_keys(Keys.DOWN)
+        search_input.send_keys(Keys.ENTER)
+        sleep(5)
