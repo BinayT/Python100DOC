@@ -1,2 +1,0 @@
-email = 'YOUR INSTA EMAIL'
-password = 'YOUR INSTA PASSWORD'
