@@ -4,6 +4,7 @@ from time import sleep
 from data import email, password
 ACC_TO_SEARCH = 'ironhackbcn'
 
+
 class InstaFollower:
     def login(self):
         driver.get('https://www.instagram.com')
