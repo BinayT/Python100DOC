@@ -33,3 +33,29 @@ class InstaFollower:
         sleep(5)
 
         driver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/header/section/ul/li[3]/a').click()
+        sleep(3)
+
+    def follow(self):
+        while True:
+            follow = driver.find_elements_by_css_selector('.PZuss button')
+            followed_amount = 0
+
+            while followed_amount < 7:
+                for i in range(len(follow)):
+                    if follow[i].text != 'Follow':
+                        follow[i].click()
+                        sleep(2)
+                        unfollow_button = driver.find_elements_by_css_selector('.mt3GC button')
+                        unfollow_button[0].click()
+                        sleep(2)
+
+                    if follow[i].text == 'Follow':
+                        follow[i].click()
+                        sleep(3)
+
+                    followed_amount += 1
+
+            following_list = driver.find_element_by_xpath('/html/body/div[5]/div/div/div[2]')
+            driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", following_list)
+            sleep(2)
+
