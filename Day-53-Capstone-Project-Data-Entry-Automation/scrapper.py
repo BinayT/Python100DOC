@@ -29,6 +29,7 @@ class ZillowScrapper:
     def get_data(self):
         zillow_site = get(url=SITE_TO_OPEN, headers=HEADERS).text
         soup = BeautifulSoup(zillow_site, 'html.parser')
+
         prices_list = soup.find_all(name="div", class_='list-card-price')
         links_container = soup.find_all(name="div", class_='list-card-info')
         links_list = [item.find(name="a", class_="list-card-link") for item in links_container]
