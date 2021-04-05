@@ -5,7 +5,7 @@ def speed_calc_decorator(fun):
     def run_func():
       fun()
       function_execution_time = time.time()
-      total_time = starting_time - function_execution_time
+      total_time = function_execution_time - function_execution_time
       print(f'Time taken to execute {fun.__name__} from initial time is of {total_time}')
     return run_func
 
@@ -18,6 +18,7 @@ def fast_function():
 def slow_function():
     for i in range(100000000):
         i * i
+
 
 fast_function()
 slow_function()
