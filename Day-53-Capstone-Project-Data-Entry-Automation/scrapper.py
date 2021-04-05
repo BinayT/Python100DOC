@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 from requests import get
-from time import sleep
 LINK = 'https://www.zillow.com'
 SITE_TO_OPEN = 'https://www.zillow.com/san-francisco-ca/rentals/1-_beds/?searchQueryState=%7B%22pagination%22%3A%7B%7' \
                'D%2C%22usersSearchTerm%22%3A%22San%20Francisco%2C%20CA%22%2C%22mapBounds%22%3A%7B%22west%22%3A-122.644' \
