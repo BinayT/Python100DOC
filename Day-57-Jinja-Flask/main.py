@@ -29,5 +29,12 @@ def guess_gender_age(name):
     return render_template('genderize.html', data=data)
 
 
+@app.route('/blog')
+def get_posts():
+    blogs = requests.get("https://api.npoint.io/5abcca6f4e39b4955965").json()
+    print(blogs)
+    return render_template('blogposts.html', blogs=blogs)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
