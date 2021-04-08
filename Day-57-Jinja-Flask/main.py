@@ -24,7 +24,7 @@ def guess_gender_age(name):
     data = {
         'age': age['age'],
         'gender': gender['gender'],
-        'name': name
+        'name': name.title()
     }
     return render_template('genderize.html', data=data)
 
