@@ -15,23 +15,15 @@ class CafeForm(FlaskForm):
     cafe_location = StringField('Cafe Location on Google Maps (URL)', validators=[URL(), DataRequired()])
     opening_time = StringField('Opening time (ex: 8AM)', validators=[DataRequired(), Length(max=4)])
     closing_time = StringField('Closing time (ex: 11PM)', validators=[DataRequired(), Length(max=4)])
-    coffee_rating = SelectField('Coffee Rating', choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'], validators=[DataRequired()])
+    coffee_rating = SelectField('Coffee Rating', choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'],
+                                validators=[DataRequired()])
     wifi_rating = SelectField('Wifi Strength Rating', choices=['✘', '💪', '💪💪', '💪💪💪', '💪💪💪💪', '💪💪💪💪💪'],
                               validators=[DataRequired()])
     power_rating = SelectField('Power Socket Rating', choices=['✘', '🔌', '🔌🔌', '🔌🔌🔌', '🔌🔌🔌🔌', '🔌🔌🔌🔌🔌'],
                                validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-# Exercise:
-# add: Location URL, open time, closing time, coffee rating, wifi rating, power outlet rating fields
-# make coffee/wifi/power a select element with choice of 0 to 5.
-#e.g. You could use emojis ☕️/💪/✘/🔌
-# make all fields required except submit
-# use a validator to check that the URL field has a URL entered.
-# ---------------------------------------------------------------------------
 
-
-# all Flask routes below
 @app.route("/")
 def home():
     return render_template("index.html")
