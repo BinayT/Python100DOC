@@ -8,6 +8,8 @@
       href="{{url_for('.static', filename='css/styles.css')}}">
 {% endblock %}
 
+{% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
 <div class="container">
   <div class="row">
@@ -15,9 +17,8 @@
 
       <h1>Add a new cafe into the database</h1>
 
-      <!-- This is where your WTForm will go -->
-
-	  <p class="space-above"><a href="#">See all cafes</a></p>
+      {{ wtf.quick_form(form, novalidate=True) }}
+	  <p class="space-above"><a href="{{ url_for('cafes') }}" role="button" class="btn btn-info">See all cafes</a></p>
 
     </div>
   </div>

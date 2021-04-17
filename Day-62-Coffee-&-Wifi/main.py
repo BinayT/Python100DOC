@@ -1,8 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired, URL, Length
 import csv
 
 app = Flask(__name__)
@@ -12,6 +12,14 @@ Bootstrap(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField('Cafe name', validators=[DataRequired()])
+    cafe_location = StringField('Cafe Location on Google Maps (URL)', validators=[URL(), DataRequired()])
+    opening_time = StringField('Opening time (ex: 8AM)', validators=[DataRequired(), Length(max=4)])
+    closing_time = StringField('Closing time (ex: 11PM)', validators=[DataRequired(), Length(max=4)])
+    coffee_rating = SelectField('Coffee Rating', choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'], validators=[DataRequired()])
+    wifi_rating = SelectField('Wifi Strength Rating', choices=['✘', '💪', '💪💪', '💪💪💪', '💪💪💪💪', '💪💪💪💪💪'],
+                              validators=[DataRequired()])
+    power_rating = SelectField('Power Socket Rating', choices=['✘', '🔌', '🔌🔌', '🔌🔌🔌', '🔌🔌🔌🔌', '🔌🔌🔌🔌🔌'],
+                               validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 # Exercise:
@@ -29,14 +37,17 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/add')
+@app.route('/add', methods=['POST', 'GET'])
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
-        print("True")
-    # Exercise:
-    # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
+        cafe_details = [form.cafe.data, form.cafe_location.data, form.opening_time.data, form.closing_time.data,
+                        form.coffee_rating.data, form.wifi_rating.data, form.power_rating.data]
+        with open('cafe-data.csv', 'a', newline='', encoding="utf8") as csv_file:
+            writer_object = csv.writer(csv_file)
+            writer_object.writerow(cafe_details)
+        return redirect(url_for('cafes'))
+
     return render_template('add.html', form=form)
 
 
