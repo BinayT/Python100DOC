@@ -11,10 +11,13 @@ Bootstrap(app)
 
 
 class CafeForm(FlaskForm):
-    cafe = StringField('Cafe name', validators=[DataRequired()])
-    cafe_location = StringField('Cafe Location on Google Maps (URL)', validators=[URL(), DataRequired()])
-    opening_time = StringField('Opening time (ex: 8AM)', validators=[DataRequired(), Length(max=4)])
-    closing_time = StringField('Closing time (ex: 11PM)', validators=[DataRequired(), Length(max=4)])
+    cafe = StringField('Cafe name', validators=[DataRequired("Cafeteria's Name is Required")])
+    cafe_location = StringField('Cafe Location on Google Maps (URL)',
+                                validators=[URL(), DataRequired('URL is required. Ex: https://goo.gl/maps/xxxxxxxxxxx)')])
+    opening_time = StringField('Opening time (ex: 8AM)', validators=[DataRequired('Please indicate the opening time.'),
+                                                                     Length(max=7)])
+    closing_time = StringField('Closing time (ex: 11PM)', validators=[DataRequired('Please indicate the closing time.'),
+                                                                      Length(max=7)])
     coffee_rating = SelectField('Coffee Rating', choices=['☕', '☕☕', '☕☕☕', '☕☕☕☕', '☕☕☕☕☕'],
                                 validators=[DataRequired()])
     wifi_rating = SelectField('Wifi Strength Rating', choices=['✘', '💪', '💪💪', '💪💪💪', '💪💪💪💪', '💪💪💪💪💪'],
