@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'tryingsqllitetoday'
+# This is creating a database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///books-list.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 Bootstrap(app)
@@ -81,8 +82,12 @@ def add():
 
 @app.route('/edit', methods=['GET', 'POST'])
 def edit_book_route():
+    # Here we're getting the id of the book with request.args.get and catching the id sent from the edit route in
+    # index.html  --> <a href="{{ url_for('edit_book_route',  --> id=book['id']) }}">Edit</a>
     book_id = request.args.get('id')
     book_details = get_a_book(book_id)
+
+    # Only if the method if POST then we want to execute this, because the route also accepts GET method.
     if request.method == 'POST':
         edit_book_title = request.form['title']
         edit_book_author = request.form['author']
@@ -96,6 +101,7 @@ def edit_book_route():
     return render_template('edit_page.html', book=book_details)
 
 
+# More of less same concept as of edit.
 @app.route('/delete')
 def delete_book():
     book_to_delete = request.args.get('id')
