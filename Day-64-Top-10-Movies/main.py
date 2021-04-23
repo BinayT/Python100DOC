@@ -45,16 +45,37 @@ def get_a_movie(movie_id):
     return Movie.query.get(movie_id)
 
 
+# Edit a movie
+def edit_a_movie(movie_id, data):
+    movie_to_edit = Movie.query.get(movie_id)
+    movie_to_edit.rating = data['rating']
+    movie_to_edit.review = data['review']
+    db.session.commit()
+
+
 @app.route("/")
 def home():
     return render_template("index.html", movies=get_all_movies())
 
 
-@app.route("/edit")
+@app.route("/edit", methods=['GET', 'POST'])
 def edit_movie():
     movie_id = request.args.get('id')
     movie_to_update = get_a_movie(movie_id)
     form = RegistrationForm()
+
+    if form.validate_on_submit() and request.method == 'POST':
+        new_rating = form.rating.data
+        new_review = form.review.data
+        data_to_send = {
+            'rating': new_rating,
+            'review': new_review
+        }
+        print(data_to_send)
+
+        edit_a_movie(movie_id, data_to_send)
+        return redirect(url_for('home'))
+
     return render_template('edit.html', movie=movie_to_update, form=form)
 
 
