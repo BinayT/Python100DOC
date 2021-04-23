@@ -1,11 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FloatField
-from wtforms.validators import DataRequired
 import requests
-import os
+
+from forms import EditRatingForm, SearchMovie
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -27,12 +25,6 @@ class Movie(db.Model):
 
     def __repr__(self):
         return '<Movie %r>' % self.title
-
-
-class RegistrationForm(FlaskForm):
-    rating = StringField('Your rating out of 10. e.g 7.5', [DataRequired()])
-    review = StringField('Your Review', [DataRequired()])
-    submit = SubmitField('Done')
 
 
 # Getting all movies
@@ -70,7 +62,7 @@ def home():
 def edit_movie():
     movie_id = request.args.get('id')
     movie_to_update = get_a_movie(movie_id)
-    form = RegistrationForm()
+    form = EditRatingForm()
 
     if form.validate_on_submit() and request.method == 'POST':
         # This is how we get data from flask+bootstrap forms
@@ -87,11 +79,18 @@ def edit_movie():
     return render_template('edit.html', movie=movie_to_update, form=form)
 
 
+# Since the /delete route don't have or need any template for movie deletion, we simply redirect to home.
 @app.route('/delete')
 def delete_movie():
     movie_id = request.args.get('id')
     delete_a_movie(movie_id)
     return redirect(url_for('home'))
+
+
+@app.route("/add")
+def add_movie():
+    add_form = SearchMovie()
+    return render_template('add.html', form=add_form)
 
 
 if __name__ == '__main__':
