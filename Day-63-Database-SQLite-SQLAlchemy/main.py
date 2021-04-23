@@ -84,11 +84,13 @@ def add():
 def edit_book_route():
     # Here we're getting the id of the book with request.args.get and catching the id sent from the edit route in
     # index.html  --> <a href="{{ url_for('edit_book_route',  --> id=book['id']) }}">Edit</a>
+    # Route will be like this --> /edit?id=X
     book_id = request.args.get('id')
     book_details = get_a_book(book_id)
 
     # Only if the method if POST then we want to execute this, because the route also accepts GET method.
     if request.method == 'POST':
+        # We get the values from the form like this, ex: <input name='title' /> == request.form['title']
         edit_book_title = request.form['title']
         edit_book_author = request.form['author']
         edit_book_rating = request.form['rating']
@@ -96,6 +98,7 @@ def edit_book_route():
             'title': edit_book_title, 'author': edit_book_author, 'rating': edit_book_rating
         }
         update_book(book_id, edit_book_details)
+        # As we are done with the process, we immediately redirect to the home URL.
         return redirect(url_for('home'))
 
     return render_template('edit_page.html', book=book_details)
