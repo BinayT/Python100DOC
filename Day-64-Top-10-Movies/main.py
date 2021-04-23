@@ -9,8 +9,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movies.db'
 Bootstrap(app)
+POSTER_PATH = 'https://image.tmdb.org/t/p/original'
 
 db = SQLAlchemy(app)
+movies_class = MovieSearcher()
 
 
 class Movie(db.Model):
@@ -18,9 +20,9 @@ class Movie(db.Model):
     title = db.Column(db.String(255), unique=True, nullable=False)
     year = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(255), nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
-    ranking = db.Column(db.Integer, nullable=False)
-    review = db.Column(db.String(255), nullable=False)
+    rating = db.Column(db.Integer, nullable=True)
+    ranking = db.Column(db.Integer, nullable=True)
+    review = db.Column(db.String(255), nullable=True)
     img_url = db.Column(db.String(255), nullable=False)
 
     def __repr__(self):
@@ -94,8 +96,7 @@ def add_movie():
     if form.validate_on_submit() and request.method == "POST":
         movie_name = form.title.data
 
-        # We initialize our class here and on next line we pass the movie's name to the method, which searches movies.
-        movies_class = MovieSearcher()
+        # We initialize our class above and on this line we pass the movie's name to the method, which searches movies.
         movies = movies_class.get_all_movies(movie_name)
 
         # Here I'm redirecting the user to the select.html file along with the data of the movies.
@@ -104,9 +105,17 @@ def add_movie():
     return render_template('add.html', form=form)
 
 
-@app.route("/select_movie", methods=['GET', 'POST'])
+@app.route("/select_movie")
 def select_movie():
-    return render_template('select.html')
+    movie_api_id = request.args.get("movie_id")
+    if movie_api_id:
+        movie = movies_class.get_a_movie(movie_api_id)
+        print(movie)
+        movie_to_save = Movie(title=movie['original_title'], description=movie['overview'],
+                              year=movie['release_date'][:4], img_url=f'{POSTER_PATH}/{movie["poster_path"]}')
+        db.session.add(movie_to_save)
+        db.session.commit()
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
