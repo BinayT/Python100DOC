@@ -12,8 +12,6 @@ Bootstrap(app)
 
 db = SQLAlchemy(app)
 
-movies_class = MovieSearcher()
-
 
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -29,17 +27,17 @@ class Movie(db.Model):
         return '<Movie %r>' % self.title
 
 
-# Getting all movies
+# Getting all movies from DB
 def get_all_movies():
     return Movie.query.all()
 
 
-# Getting a movie
+# Getting a movie from DB
 def get_a_movie(movie_id):
     return Movie.query.get(movie_id)
 
 
-# Edit a movie
+# Edit a movie from DB
 def edit_a_movie(movie_id, data):
     movie_to_edit = Movie.query.get(movie_id)
     movie_to_edit.rating = data['rating']
@@ -47,7 +45,7 @@ def edit_a_movie(movie_id, data):
     db.session.commit()
 
 
-# Deleting a movie
+# Deleting a movie from DB
 def delete_a_movie(movie_id):
     movie_to_delete = Movie.query.get(movie_id)
     db.session.delete(movie_to_delete)
@@ -62,6 +60,7 @@ def home():
 # We must add (methods=['GET', 'POST']) on @app.route() to let us perform the HTTP task that we asked for.
 @app.route("/edit", methods=['GET', 'POST'])
 def edit_movie():
+    # This is how we get query string, in our case its /edit?id=X
     movie_id = request.args.get('id')
     movie_to_update = get_a_movie(movie_id)
     form = EditRatingForm()
@@ -94,10 +93,20 @@ def add_movie():
     form = SearchMovie()
     if form.validate_on_submit() and request.method == "POST":
         movie_name = form.title.data
+
+        # We initialize our class here and on next line we pass the movie's name to the method, which searches movies.
+        movies_class = MovieSearcher()
         movies = movies_class.get_all_movies(movie_name)
-        print(movies)
+
+        # Here I'm redirecting the user to the select.html file along with the data of the movies.
+        return render_template('select.html', movies=movies)
 
     return render_template('add.html', form=form)
+
+
+@app.route("/select_movie", methods=['GET', 'POST'])
+def select_movie():
+    return render_template('select.html')
 
 
 if __name__ == '__main__':
