@@ -110,12 +110,12 @@ def select_movie():
     movie_api_id = request.args.get("movie_id")
     if movie_api_id:
         movie = movies_class.get_a_movie(movie_api_id)
-        print(movie)
         movie_to_save = Movie(title=movie['original_title'], description=movie['overview'],
                               year=movie['release_date'][:4], img_url=f'{POSTER_PATH}/{movie["poster_path"]}')
         db.session.add(movie_to_save)
         db.session.commit()
-        return redirect(url_for('home'))
+
+        return redirect(url_for('edit_movie', id=movie_to_save.id))
 
 
 if __name__ == '__main__':
