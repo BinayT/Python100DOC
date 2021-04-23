@@ -53,11 +53,19 @@ def edit_a_movie(movie_id, data):
     db.session.commit()
 
 
+# Deleting a movie
+def delete_a_movie(movie_id):
+    movie_to_delete = Movie.query.get(movie_id)
+    db.session.delete(movie_to_delete)
+    db.session.commit()
+
+
 @app.route("/")
 def home():
     return render_template("index.html", movies=get_all_movies())
 
 
+# We must add (methods=['GET', 'POST']) on @app.route() to let us perform the HTTP task that we asked for.
 @app.route("/edit", methods=['GET', 'POST'])
 def edit_movie():
     movie_id = request.args.get('id')
@@ -65,18 +73,25 @@ def edit_movie():
     form = RegistrationForm()
 
     if form.validate_on_submit() and request.method == 'POST':
+        # This is how we get data from flask+bootstrap forms
         new_rating = form.rating.data
         new_review = form.review.data
         data_to_send = {
             'rating': new_rating,
             'review': new_review
         }
-        print(data_to_send)
 
         edit_a_movie(movie_id, data_to_send)
         return redirect(url_for('home'))
 
     return render_template('edit.html', movie=movie_to_update, form=form)
+
+
+@app.route('/delete')
+def delete_movie():
+    movie_id = request.args.get('id')
+    delete_a_movie(movie_id)
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
