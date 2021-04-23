@@ -1,9 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-import requests
 
 from forms import EditRatingForm, SearchMovie
+from request_movie import MovieSearcher
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -11,6 +11,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///movies.db'
 Bootstrap(app)
 
 db = SQLAlchemy(app)
+
+movies_class = MovieSearcher()
 
 
 class Movie(db.Model):
@@ -87,10 +89,15 @@ def delete_movie():
     return redirect(url_for('home'))
 
 
-@app.route("/add")
+@app.route("/add", methods=['GET', 'POST'])
 def add_movie():
-    add_form = SearchMovie()
-    return render_template('add.html', form=add_form)
+    form = SearchMovie()
+    if form.validate_on_submit() and request.method == "POST":
+        movie_name = form.title.data
+        movies = movies_class.get_all_movies(movie_name)
+        print(movies)
+
+    return render_template('add.html', form=form)
 
 
 if __name__ == '__main__':
