@@ -33,11 +33,15 @@ class Movie(db.Model):
 
 # Getting all movies from DB
 def get_all_movies():
+    # Here we getting all the movies on descending order, depending upon their rating
     movie_on_desc_order = Movie.query.order_by(Movie.rating.desc()).all()
-    rating = 1
+    ranking = 1
+
+    # With this for loop each time we hit the home route, we giving new ranking to each movie, hence it keeps track
+    # of the movie's ranking
     for movie in movie_on_desc_order:
-        movie.ranking = rating
-        rating += 1
+        movie.ranking = ranking
+        ranking += 1
     return movie_on_desc_order
 
 
