@@ -33,7 +33,12 @@ class Movie(db.Model):
 
 # Getting all movies from DB
 def get_all_movies():
-    return Movie.query.all()
+    movie_on_desc_order = Movie.query.order_by(Movie.rating.desc()).all()
+    rating = 1
+    for movie in movie_on_desc_order:
+        movie.ranking = rating
+        rating += 1
+    return movie_on_desc_order
 
 
 # Getting a movie from DB with the DB's id.
