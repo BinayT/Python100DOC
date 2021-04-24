@@ -12,6 +12,8 @@ Bootstrap(app)
 POSTER_PATH = 'https://image.tmdb.org/t/p/original'
 
 db = SQLAlchemy(app)
+
+# We initialize the movie searching class here so we can use it's methods in throughout the app.
 movies_class = MovieSearcher()
 
 
@@ -34,12 +36,12 @@ def get_all_movies():
     return Movie.query.all()
 
 
-# Getting a movie from DB
+# Getting a movie from DB with the DB's id.
 def get_a_movie(movie_id):
     return Movie.query.get(movie_id)
 
 
-# Edit a movie from DB
+# Edit a movie from DB alongside given DB id for the film and data provided from the form.
 def edit_a_movie(movie_id, data):
     movie_to_edit = Movie.query.get(movie_id)
     movie_to_edit.rating = data['rating']
@@ -47,13 +49,14 @@ def edit_a_movie(movie_id, data):
     db.session.commit()
 
 
-# Deleting a movie from DB
+# Deleting a movie from DB with the given DB id
 def delete_a_movie(movie_id):
     movie_to_delete = Movie.query.get(movie_id)
     db.session.delete(movie_to_delete)
     db.session.commit()
 
 
+# Here we sending all movies from the DB as arguments to later render them on the home page.
 @app.route("/")
 def home():
     return render_template("index.html", movies=get_all_movies())
@@ -65,6 +68,8 @@ def edit_movie():
     # This is how we get query string, in our case its /edit?id=X
     movie_id = request.args.get('id')
     movie_to_update = get_a_movie(movie_id)
+
+    # Here I'm initializing a bootstrap FlaskForm so later i can use validate_on_submit() method for auto validation.
     form = EditRatingForm()
 
     if form.validate_on_submit() and request.method == 'POST':
@@ -77,8 +82,11 @@ def edit_movie():
         }
 
         edit_a_movie(movie_id, data_to_send)
+        # After editing/giving our personal rating and review to the movie, we instantly redirect to the home page.
         return redirect(url_for('home'))
 
+    # Here we are passing the movie object from the DB to know which movie we editing and flask form to
+    # create quick forms with bootstrap. Check out edit.html to see how the movie object is implemented.
     return render_template('edit.html', movie=movie_to_update, form=form)
 
 
@@ -99,7 +107,8 @@ def add_movie():
         # We initialize our class above and on this line we pass the movie's name to the method, which searches movies.
         movies = movies_class.get_all_movies(movie_name)
 
-        # Here I'm redirecting the user to the select.html file along with the data of the movies.
+        # Here I'm redirecting the user to the select.html file along with movie object which contains all the movies
+        # and their details. It's a list of movies.
         return render_template('select.html', movies=movies)
 
     return render_template('add.html', form=form)
@@ -107,14 +116,19 @@ def add_movie():
 
 @app.route("/select_movie")
 def select_movie():
+    # We get the movie's id from the movie database API, not the ID of our local database.
     movie_api_id = request.args.get("movie_id")
     if movie_api_id:
+        # Once if there is the api's id, then we search for that movie with it's id and later save it to our database.
         movie = movies_class.get_a_movie(movie_api_id)
         movie_to_save = Movie(title=movie['original_title'], description=movie['overview'],
                               year=movie['release_date'][:4], img_url=f'{POSTER_PATH}/{movie["poster_path"]}')
         db.session.add(movie_to_save)
         db.session.commit()
 
+        # Once we save the movie to our database, then we access the saved movie, by simply accessing the
+        # "movie_to_save" object to get it's ID (the DB id now, not the id of the API)) and send it to the edit_movie
+        # because now edit_movie needs the DB's id and not the API's id.
         return redirect(url_for('edit_movie', id=movie_to_save.id))
 
 
